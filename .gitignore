@@ -1,0 +1,5 @@
+back/__pycache__
+back/elf_analyse/__pycache__
+back/pe_analyse/__pycache__
+back/security/__pycache__
+back/venv
