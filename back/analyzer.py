@@ -1,6 +1,8 @@
 import magic
 
 from security.infos import get_security_info
+from elf_analyse.get_elf_info import get_elf_info
+from pe_analyse.get_pe_info import get_pe_info
 
 analysis_result: dict = {
         'filename':'',
@@ -74,6 +76,16 @@ def analyze_file(file) -> dict:
     analysis_result['security'] = security_info
 
     # TODO: getting disassembly code
+    if file_format == 'ELF':
+        sections_info = get_elf_info(analysis_result, file_content)
+    elif file_format.startswith('PE'):
+        sections_info = get_pe_info(analysis_result, file_content)
+    else:
+        sections_info = []
+
+    analysis_result['section_infos'] = sections_info
+
+    print(analysis_result)
     # TODO: getting decompiled code
 
     return analysis_result
